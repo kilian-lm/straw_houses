@@ -1,0 +1,40 @@
+\section{Estimating the Carbon Footprint Impact of Straw Houses}
+
+Let's consider the following variables:
+\begin{itemize}
+    \item \( C \): Total carbon footprint from all sources.
+    \item \( H \): Percentage of total carbon footprint caused by the housing industry.
+    \item \( S \): Number of straw houses, assuming exponential growth from the selected starting year.
+    \item \( R \): Reduction in carbon footprint per straw house.
+    \item \( \text{{starting\_year}} \): The year from which the exponential growth in straw houses begins (default 1950).
+    \item \( \text{{degradation\_rate}} \): The rate at which the carbon footprint reduction due to straw houses degrades over time.
+    \item \( \text{{growth\_rate}} \): The exponential growth rate of straw houses.
+\end{itemize}
+
+The total carbon footprint contributed by the housing industry can be represented as:
+\[
+C_{\text{{housing}}} = C \times \frac{H}{100}
+\]
+
+The number of straw houses grows exponentially from the selected starting year:
+\[
+S = (\text{{year}} \geq \text{{starting\_year}}) \times \exp(\text{{growth\_rate}} \times (\text{{year}} - \text{{starting\_year}}))
+\]
+
+The degradation of the reduction effect of straw houses is applied as:
+\[
+S \times= (1 - \text{{degradation\_rate}})^{(\text{{year}} - \text{{starting\_year}})}
+\]
+
+The total reduction in carbon footprint due to straw houses can be represented as:
+\[
+C_{\text{{straw}}} = S \times R
+\]
+
+Therefore, the adjusted carbon footprint for the housing industry, considering the subtractive effect of straw houses, is:
+\[
+C_{\text{{adjusted}}} = C_{\text{{housing}}} - C_{\text{{straw}}} = C \times \frac{H}{100} - S \times R
+\]
+
+This equation helps in understanding the potential impact of building houses with straw, reflecting a temporary decrease in CO2 emissions, considering the exponential growth of straw houses and the degradation of the reduction effect over time.
+
