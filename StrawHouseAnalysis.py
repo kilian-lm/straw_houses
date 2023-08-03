@@ -28,6 +28,9 @@ class StrawHouseAnalysis:
 
         country_data['C_housing'] = country_data['co2'] * (self.H / 100)
 
+
+
+
         # Assumes exponential growth in the number of straw houses starting from the given year
         country_data['S'] = (country_data['year'] >= self.starting_year) * np.exp(
             self.growth_rate * (country_data['year'] - self.starting_year))
@@ -35,6 +38,24 @@ class StrawHouseAnalysis:
         # Applies degradation function
         degradation_factor = 1 - self.degradation_rate
         country_data['S'] *= degradation_factor ** (country_data['year'] - self.starting_year)
+
+        country_data['S'] *= 2 ** (5 - 3)
+
+        list_some = {'a': 3}
+
+        list_dict = [3, 5]
+
+        list_dict *= 2 ** (5 - 3)
+
+
+
+
+
+
+
+
+
+
 
         country_data['C_straw'] = country_data['S'] * self.R
         country_data['C_adjusted'] = country_data['C_housing'] - country_data['C_straw']
