@@ -1,21 +1,23 @@
-# Use an official Python runtime as the base image
-FROM python:3.11-slim-buster
+# Use Python 3.11 as the base image
+FROM  python:3.11.0
 
-# Set the working directory inside the container
-# WORKDIR /usr/src/app
+LABEL maintainer="kilian.lehn"
 
-# Copy the local files to the container
-#COPY main.py .
-#COPY StrawHouseAnalysis.py .
-#COPY assets/ ./assets/
+# Set the working directory to /app
+#WORKDIR /app
 
-COPY [".", "./"]
-# Install required packages
+# Copy the requirements file into the container
+COPY requirements.txt .
+
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the app runs on
-EXPOSE 8080
-ENV PORT 8080
+# Copy the app directory contents into the container
+COPY [".", "./"]
 
-# Define the command to run the app
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app.server
+# Expose the port dash is running on
+EXPOSE 8050
+
+# Run the app
+CMD ["gunicorn", "app:server"]
+
