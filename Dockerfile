@@ -2,17 +2,20 @@
 FROM python:3.11-slim-buster
 
 # Set the working directory inside the container
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
 
 # Copy the local files to the container
-COPY main.py .
-COPY StrawHouseAnalysis.py .
-COPY assets/ ./assets/
+#COPY main.py .
+#COPY StrawHouseAnalysis.py .
+#COPY assets/ ./assets/
+
+COPY [".", "./"]
 # Install required packages
-RUN pip install --no-cache-dir pandas numpy matplotlib dash
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port the app runs on
-EXPOSE 50001
+EXPOSE 8080
+ENV PORT 8080
 
 # Define the command to run the app
-CMD ["python", "main.py"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app.server
