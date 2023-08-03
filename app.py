@@ -7,9 +7,13 @@ from flask import Flask
 
 # server = Flask(__name__)
 
-server = Flask(__name__)
-app = Dash(server=server,  suppress_callback_exceptions=True)
+# server = Flask(__name__)
+#
+# app = Dash(server=server,  suppress_callback_exceptions=True)
 
+
+app = Dash(__name__, suppress_callback_exceptions=True)
+server = app.server
 
 # app = Dash(__name__, suppress_callback_exceptions=True)
 
@@ -123,13 +127,13 @@ def update_analysis_plot(analysis_type, selected_country, starting_year):
     return figure
 
 # Route handling
-@server.route("/")
-def MyDashApp():
-    return app.index()
+# @server.route("/")
+# def MyDashApp():
+#     return app.index()
 
 # Running the app
-if __name__ == '__main__':
-    app.run_server()
+# if __name__ == '__main__':
+#     app.run_server()
 
 
 

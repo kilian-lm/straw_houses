@@ -18,6 +18,6 @@ COPY [".", "./"]
 # Expose the port dash is running on
 EXPOSE 8050
 
-# Run the app
-CMD ["gunicorn", "app:server"]
+# Run locally
+CMD gunicorn --bind 0.0.0.0:8050 app:server
 
